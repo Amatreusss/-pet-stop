@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PET STOP - Pet Shop Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Ubuntu, sans-serif;
+            overflow-x: hidden;
+            background: #fff;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #E63946 0%, #D32F2F 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            width: 100%;
+            align-items: center;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .hero-text {
+            color: white;
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .separator {
+            width: 80px;
+            height: 4px;
+            background: white;
+            margin: 20px 0;
+            border-radius: 2px;
+            animation: expandWidth 0.8s ease-out 0.3s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #E63946;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite, fadeInUp 0.8s ease-out 0.4s both;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            background: #f5f5f5;
+        }
+
+        .whatsapp-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .location-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 30px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .location-icon {
+            font-size: 1.5rem;
+        }
+
+        .location-text {
+            line-height: 1.4;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInRight 0.8s ease-out 0.2s both;
+        }
+
+        .pet-image {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        .scroll-text {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 80px; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .statistics {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <section class="hero">
+            <div class="badge">Pet Shop Premium</div>
+
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">O melhor cuidado para quem faz parte da sua família</h1>
+                    
+                    <div class="separator"></div>
+                    
+                    <p class="hero-subtitle">Qualidade, carinho e sofisticação para o seu pet</p>
+                    
+                    <p class="hero-description">
+                        Produtos selecionados e serviços especializados para garantir o bem-estar do seu melhor amigo
+                    </p>
+
+                    <a href="https://wa.me/554184628958?text=Olá,%20vim%20pelo%20site%20da%20PET%20STOP%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20serviços." 
+                       class="cta-button" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.255.949c-1.238.503-2.359 1.236-3.203 2.162-.844.927-1.406 2.026-1.635 3.203C2.444 10.556 2.663 11.889 3.352 13.05 4.041 14.21 5.146 15.12 6.53 15.658c1.384.537 2.917.726 4.425.625 1.508-.1 2.936-.424 4.158-1.028 1.222-.604 2.151-1.428 2.748-2.368.597-.94.923-2.017.923-3.154 0-1.137-.326-2.214-.923-3.154-.597-.94-1.526-1.764-2.748-2.368-1.222-.604-2.65-.928-4.158-1.028zm0 0"/>
+                        </svg>
+                        Falar no WhatsApp
+                    </a>
+
+                    <div class="location-info">
+                        <span class="location-icon">📍</span>
+                        <span class="location-text">Av. Pref. Dr. Roque Vernalha, 1749 - Serraria do Rocha, Paranaguá - PR, 83221-000</span>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Labrador_on_Quantock_%282175262184%29.jpg/1200px-Labrador_on_Quantock_%282175262184%29.jpg" alt="PET STOP - Pets em destaque" class="pet-image" style="max-width: 400px;">
+                </div>
+            </div>
+
+            <div class="statistics">
+                <div class="stat-item">
+                    <div class="stat-number">+1000</div>
+                    <div class="stat-label">Clientes Satisfeitos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+500</div>
+                    <div class="stat-label">Produtos Premium</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Atendimento Especializado</div>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <div class="scroll-dot"></div>
+                <span class="scroll-text">Saiba mais</span>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function( ) {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            const animateCounter = (element) => {
+                const text = element.textContent;
+                const target = parseInt(text.replace(/\D/g, ''));
+                const suffix = text.replace(/[0-9+]/g, '');
+                let current = 0;
+                const increment = target / 50;
+                
+                const counter = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = '+' + target + suffix;
+                        clearInterval(counter);
+                    } else {
+                        element.textContent = '+' + Math.floor(current) + suffix;
+                    }
+                }, 30);
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            statNumbers.forEach(num => observer.observe(num));
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
